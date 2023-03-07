@@ -1,0 +1,26 @@
+# O.S Specific
+.DS_Store
+
+# Code Editors
+/.idea
+/.fleet
+/.vscode
+
+# Node Env
+node_modules
+*.node
+*.log
+*.tgz
+
+# Env Config
+.env
+.env.*
+!.env.pattern
+
+# Build Destinations
+*/.next
+*/build
+*/dist
+
+# Turbo
+.turbo

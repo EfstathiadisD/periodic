@@ -1,0 +1,7 @@
+{
+  "name": "@periodic/tools",
+  "private": true,
+  "scripts": {
+    "build": "tsup --config ./tsup.config.ts"
+  }
+}

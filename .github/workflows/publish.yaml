@@ -1,0 +1,33 @@
+name: Changesets Publish
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    name: Run Changesets
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set Pnpm
+        uses: pnpm/action-setup@v3
+
+      - name: Set Node
+        uses: actions/setup-node@v3
+        with:
+          cache: "pnpm"
+          node-version: "19.6.0"
+          registry-url: https://registry.npmjs.org/
+
+      - name: Install Dependancies
+        run: pnpm install
+
+      - name: Publish
+        run: pnpm run publish ${{ github.ref_name }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

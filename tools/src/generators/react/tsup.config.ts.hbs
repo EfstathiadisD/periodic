@@ -1,0 +1,16 @@
+import { defineConfig } from "tsup";
+
+export default defineConfig({
+  /* ESM Input & Output */
+  entryPoints: ["src/index.ts"],
+  target: "es2022",
+  format: ["esm"],
+  outDir: "build",
+
+  /* Build Options */
+  treeshake: true,
+  sourcemap: true,
+  splitting: true,
+  minify: true,
+  clean: true,
+})

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["tsconfig.base.json", ".eslintrc", ".prettierrc"],
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build", "^format", "^test"],
+      "outputs": ["build/**"]
+    },
+    "format": {
+      "dependsOn": ["^format"],
+      "inputs": ["packages/**/*.ts", "packages/**/*.tsx"]
+    },
+    "test": {
+      "dependsOn": ["^test"],
+      "outputs": ["packages/**/coverage/**"],
+      "inputs": ["packages/**/*.ts", "packages/**/*.tsx"]
+    },
+    "publish": {
+      "dependsOn": ["^publish", "^build", "^fmt", "^test"]
+    }
+  }
+}

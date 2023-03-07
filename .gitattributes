@@ -1,0 +1,11 @@
+# Text files. Should be normalized to LF.
+*.gitattributes text
+.gitignore      text
+*.md            text diff=markdown
+
+# Ignore all Git files in the root directory
+.gitattributes  export-ignore
+.gitignore      export-ignore
+
+# Enable Syntax Highlighting for Git Attributes.
+*.gitattributes linguist-language=gitattributes

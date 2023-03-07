@@ -1,0 +1,8 @@
+{
+  "name": "@periodic/{{name}}",
+  "scripts": {
+    "fmt": "prettier --write ./src && eslint --fix ./src && tsc --noEmit",
+    "test": "jest --maxWorkers=50% --coverage",
+    "build": "tsup --config tsup.config.ts"
+  }
+}

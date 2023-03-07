@@ -1,0 +1,4 @@
+#!/bin/sh
+. "$(dirname $0)/.config/_/husky.sh"
+
+pnpm fmt && pnpm test

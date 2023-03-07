@@ -1,0 +1,34 @@
+{
+  "extends": [
+    "plugin:@shopify/typescript",
+    "plugin:@shopify/esnext",
+    "plugin:@shopify/jest",
+    "plugin:@shopify/prettier"
+  ],
+  "plugins": ["react", "prettier"],
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "parserOptions": {
+    "project": "tsconfig.base.json",
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "version": 2022,
+      "jsx": true
+    }
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "project": ["tsconfig.base.json", "packages/**/tsconfig.json"]
+      }
+    }
+  },
+  "ignorePatterns": ["node_modules/", "build/", ".next/", "coverage/"],
+  "rules": {}
+}
