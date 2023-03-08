@@ -1,92 +1,69 @@
 import type { NodePlopAPI } from "plop";
 
-import {
-  createFile,
-  modifyTSConfig,
-  modifyJestConfig,
-  install,
-} from "./shared";
-import { getInput, getOptions } from "./shared";
+import { prompts } from "./prompts";
+import { createTsupFiles } from "./commands";
+import { pnpm, pnpmInstall } from "./commands";
+import { modifyJestConfig, modifyTSConfig } from "./commands";
 
-/* TODO: Custom command to run `fmt` script after process ends  */
-/* TODO: Generators for `Remix`, `React` and `Node`*/
-
-function getScriptPackage(plop: NodePlopAPI) {
-  plop.setActionType("install", install);
+function getScriptGenerator(plop: NodePlopAPI) {
+  plop.setActionType("pnpm", pnpm);
 
   plop.setGenerator("package:script", {
     description: "Generate a TS Lib with TSup",
-    prompts: [
-      getInput("name", "What should we name it?"),
-      getOptions("kind", "Where should we placed it?", ["apps", "packages"]),
-    ],
+    prompts: [...prompts],
     actions: (answers) => {
       if (!answers) return [];
 
       return [
-        createFile("tsup.config.ts", "script", answers),
-        createFile("tsconfig.json", "script", answers),
-        createFile("package.json", "script", answers),
-        createFile(".eslintrc", "script", answers),
-        createFile("src/index.ts", "script", answers),
-        modifyTSConfig("tsconfig.base.json"),
-        modifyJestConfig("jest.config.ts"),
-        {
-          type: "install",
-        },
+        ...createTsupFiles("script", answers),
+        modifyJestConfig(),
+        modifyTSConfig(),
+        pnpmInstall(),
       ];
     },
   });
 }
 
-function getReactPacakge(plop: NodePlopAPI) {
+function getReactGenerator(plop: NodePlopAPI) {
+  plop.setActionType("pnpm", pnpm);
+
   plop.setGenerator("package:react", {
     description: "Generate a React Lib with TSup",
-    prompts: [
-      getInput("name", "What should we name it?"),
-      getOptions("kind", "Where should we placed it?", ["apps", "packages"]),
-    ],
+    prompts: [...prompts],
     actions: (answers) => {
       if (!answers) return [];
 
       return [
-        createFile("tsup.config.ts", "react", answers),
-        createFile("tsconfig.json", "react", answers),
-        createFile("package.json", "react", answers),
-        createFile(".eslintrc", "react", answers),
-        createFile("src/index.ts", "react", answers),
-        modifyTSConfig("tsconfig.base.json"),
-        modifyJestConfig("jest.config.ts"),
+        ...createTsupFiles("react", answers),
+        modifyJestConfig(),
+        modifyTSConfig(),
+        pnpmInstall(),
       ];
     },
   });
 }
 
-function getRemixPackage(plop: NodePlopAPI) {
+function getRemixGenerator(plop: NodePlopAPI) {
+  plop.setActionType("pnpm", pnpm);
+
   plop.setGenerator("package:remix", {
     description: "Generate a Remix Lib with TSup",
-    prompts: [
-      getInput("name", "What should we name it?"),
-      getOptions("kind", "Where should we placed it?", ["apps", "packages"]),
-    ],
+    prompts: [...prompts],
     actions: (answers) => {
       if (!answers) return [];
 
       return [
-        createFile("tsup.config.ts", "remix", answers),
-        createFile("tsconfig.json", "remix", answers),
-        createFile("package.json", "remix", answers),
-        createFile(".eslintrc", "remix", answers),
-        createFile("src/index.ts", "remix", answers),
-        modifyTSConfig("tsconfig.base.json"),
-        modifyJestConfig("jest.config.ts"),
+        ...createTsupFiles("remix", answers),
+        modifyJestConfig(),
+        modifyTSConfig(),
+        pnpmInstall(),
       ];
     },
   });
 }
 
 export default function (plop: NodePlopAPI) {
-  getReactPacakge(plop);
-  getRemixPackage(plop);
-  getScriptPackage(plop);
+  getScriptGenerator(plop);
+  getReactGenerator(plop);
+  getRemixGenerator(plop);
 }

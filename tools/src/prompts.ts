@@ -17,4 +17,9 @@ function getOptions(name: string, message: string, choices: string[]) {
   };
 }
 
-export { getInput, getOptions };
+const prompts = [
+  getInput("name", "What should we name it?"),
+  getOptions("kind", "Where should we placed it?", ["apps", "packages"]),
+] as const;
+
+export { prompts };
