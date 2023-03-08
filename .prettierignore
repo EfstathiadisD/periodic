@@ -1,3 +1,33 @@
+# Root Files
+package.json
+pnpm-lock.yaml
+
+# Root Dirs
+build/
+coverage/
+node_modules/
+
+# Packages, Apps & Tools
 packages/**/CHANGELOG.md
 packages/**/.next
 packages/**/build
+packages/**/coverage
+packages/**/node_modules
+packages/**/package.json
+
+apps/**/CHANGELOG.md
+apps/**/.next
+apps/**/build
+apps/**/coverage
+apps/**/node_modules
+apps/**/package.json
+
+tools/**/CHANGELOG.md
+tools/**/.next
+tools/**/build
+tools/**/coverage
+tools/**/node_modules
+tools/**/package.json
+
+# For Tools ignore generators
+tools/**/generators/**

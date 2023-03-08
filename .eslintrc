@@ -1,18 +1,18 @@
 {
+  "root": true,
   "extends": [
-    "plugin:@shopify/typescript",
     "plugin:@shopify/esnext",
     "plugin:@shopify/jest",
     "plugin:@shopify/prettier"
   ],
-  "plugins": ["react", "prettier"],
+  "plugins": ["react", "prettier", "@typescript-eslint"],
   "env": {
     "browser": true,
     "es2021": true,
     "node": true
   },
   "parserOptions": {
-    "project": "tsconfig.base.json",
+    "project": "./tsconfig.base.json",
     "sourceType": "module",
     "ecmaFeatures": {
       "version": 2022,

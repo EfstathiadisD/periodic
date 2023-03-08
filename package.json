@@ -9,7 +9,7 @@
   "scripts": {
     "publish": "turbo run publish --filter=[origin/main]",
     "build": "turbo run build --filter=[origin/main]",
-    "format": "turbo run fmt --filter=[origin/main]",
+    "fmt": "turbo run fmt --filter=[origin/main]",
     "test": "turbo run test --filter=[origin/main]",
     "prepare": "husky install .config/husky",
     "generate": "plop --plopfile ./tools/build/plopfile.mjs"

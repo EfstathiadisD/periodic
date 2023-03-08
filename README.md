@@ -11,18 +11,20 @@ You can find the code in the `tools` dir. That package is using the same build t
 
 It needs to be build before one can use it. So, in order to do that, you need to run the following command(s) in case you haven't.
 
-
 Install all dependancies.
+
 ```bash
 pnpm install
 ```
 
 Build the `tools` package from the root of the repo.
+
 ```bash
 pnpm -F @periodic/tools build
 ```
 
 Run the generators from the root of the repo.
+
 ```bash
 pnpm run generate
 ```

@@ -29,6 +29,50 @@ function pnpmInstall() {
     type: "pnpm",
   };
 }
+
+function fmt(_: Answers, config: Record<string, string>) {
+  return new Promise<string>((resolve, reject) => {
+    const fmt = child_process.spawn("pnpm", ["fmt"], {
+      cwd: config.path,
+    });
+
+    fmt.stdout.on("close", () => {
+      resolve("Fmt with Turbo has run successfully!");
+    });
+
+    fmt.stdout.on("error", (err) => {
+      reject(`Fmt with Turbo has failed! Error: ${JSON.stringify(err)}.`);
+    });
+  });
+}
+
+function fmtWrite() {
+  return {
+    type: "fmt",
+  };
+}
+
+function prettier(_: Answers, config: Record<string, string>) {
+  return new Promise<string>((resolve, reject) => {
+    const fmt = child_process.spawn("pnpm", ["prettier", "--write", "."], {
+      cwd: config.path,
+    });
+
+    fmt.stdout.on("close", () => {
+      resolve("Prettier has run successfully!");
+    });
+
+    fmt.stdout.on("error", (err) => {
+      reject(`Prettier has failed! Error: ${JSON.stringify(err)}.`);
+    });
+  });
+}
+
+function prettierWrite() {
+  return {
+    type: "prettier",
+  };
+}
 /* Custom Commands */
 
 /* TSup Commands */
@@ -69,5 +113,7 @@ function modifyJestConfig() {
 /* Shared Commands */
 
 export { createTsupFiles };
+export { fmt, fmtWrite };
 export { pnpm, pnpmInstall };
+export { prettier, prettierWrite };
 export { modifyTSConfig, modifyJestConfig };

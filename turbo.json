@@ -3,11 +3,11 @@
   "globalDependencies": ["tsconfig.base.json", ".eslintrc", ".prettierrc"],
   "pipeline": {
     "build": {
-      "dependsOn": ["^build", "^format", "^test"],
+      "dependsOn": ["^build", "^fmt", "^test"],
       "outputs": ["build/**"]
     },
-    "format": {
-      "dependsOn": ["^format"],
+    "fmt": {
+      "dependsOn": ["^fmt"],
       "inputs": ["packages/**/*.ts", "packages/**/*.tsx"]
     },
     "test": {
