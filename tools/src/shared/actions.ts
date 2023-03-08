@@ -1,3 +1,4 @@
+import child from "child_process";
 import path from "path";
 import url from "url";
 
@@ -46,6 +47,20 @@ function transformJestConfig(content: string, { name, kind }: Answers) {
   return `export default ${JSON.stringify(updatedJestConfig, null, "\t")}`;
 }
 
+function install(_: Answers, config: Record<string, string>): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const pnpm = child.spawn("pnpm", ["install"], { cwd: config.path });
+
+    pnpm.stdout.on("close", () => {
+      resolve("Pnpm install has run successfully!");
+    });
+
+    pnpm.stdout.on("error", (err) => {
+      reject(`Pnpm install has failed! Error: ${JSON.stringify(err)}.`);
+    });
+  });
+}
+
 function createFile(name: string, generator: string, answers: Answers) {
   return {
     type: "add",
@@ -71,4 +86,4 @@ function modifyJestConfig(name: string) {
 }
 
 export { ROOT_PATH, BUILD_PATH };
-export { modifyTSConfig, modifyJestConfig, createFile };
+export { modifyTSConfig, modifyJestConfig, createFile, install };

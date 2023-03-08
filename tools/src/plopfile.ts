@@ -1,12 +1,19 @@
 import type { NodePlopAPI } from "plop";
 
-import { createFile, modifyTSConfig, modifyJestConfig } from "./shared";
+import {
+  createFile,
+  modifyTSConfig,
+  modifyJestConfig,
+  install,
+} from "./shared";
 import { getInput, getOptions } from "./shared";
 
 /* TODO: Custom command to run `fmt` script after process ends  */
 /* TODO: Generators for `Remix`, `React` and `Node`*/
 
 function getScriptPackage(plop: NodePlopAPI) {
+  plop.setActionType("install", install);
+
   plop.setGenerator("package:script", {
     description: "Generate a TS Lib with TSup",
     prompts: [
@@ -24,6 +31,9 @@ function getScriptPackage(plop: NodePlopAPI) {
         createFile("src/index.ts", "script", answers),
         modifyTSConfig("tsconfig.base.json"),
         modifyJestConfig("jest.config.ts"),
+        {
+          type: "install",
+        },
       ];
     },
   });
