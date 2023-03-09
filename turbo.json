@@ -17,6 +17,10 @@
     },
     "publish": {
       "dependsOn": ["^publish", "^build", "^fmt", "^test"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
     }
   }
 }
