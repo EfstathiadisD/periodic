@@ -1,0 +1,10 @@
+import type { AppConfig } from "@remix-run/dev";
+
+const config: AppConfig = {
+  ignoredRouteFiles: ["**/.*"],
+  appDirectory: "src",
+  publicPath: "/build/",
+  assetsBuildDirectory: "public/build",
+};
+
+export default config;

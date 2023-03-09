@@ -94,6 +94,27 @@ function createTsupFiles(generator: string, answers: Answers) {
 }
 /* TSup Commands */
 
+/* Remix Commands */
+function createRemixFiles(generator: string, answers: Answers) {
+  const files = ["src/root.tsx", "src/routes/index.tsx"] as const;
+  const tools = [
+    "remix.config.ts",
+    "remix.env.d.ts",
+    "jest.config.ts",
+    "tsconfig.json",
+    "package.json",
+    ".eslintrc",
+  ] as const;
+
+  return [...files, ...tools].map((file) => ({
+    type: "add",
+    path: path.join(ROOT_PATH, answers.kind, answers.name, file),
+    templateFile: path.join(BUILD_PATH, generator, `${file}.hbs`),
+  }));
+}
+
+/* Remix Commands */
+
 /* Shared Commands */
 function modifyTSConfig() {
   return {
@@ -112,7 +133,7 @@ function modifyJestConfig() {
 }
 /* Shared Commands */
 
-export { createTsupFiles };
+export { createTsupFiles, createRemixFiles };
 export { fmt, fmtWrite };
 export { pnpm, pnpmInstall };
 export { prettier, prettierWrite };

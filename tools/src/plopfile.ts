@@ -1,7 +1,7 @@
 import type { NodePlopAPI } from "plop";
 
 import { prompts } from "./prompts";
-import { createTsupFiles } from "./commands";
+import { createTsupFiles, createRemixFiles } from "./commands";
 import { fmt, fmtWrite } from "./commands";
 import { pnpm, pnpmInstall } from "./commands";
 import { prettier, prettierWrite } from "./commands";
@@ -30,6 +30,30 @@ function getScriptGenerator(plop: NodePlopAPI) {
   });
 }
 
+function getRemixGenerator(plop: NodePlopAPI) {
+  plop.setActionType("prettier", prettier);
+  plop.setActionType("pnpm", pnpm);
+  plop.setActionType("fmt", fmt);
+
+  plop.setGenerator("package:remix", {
+    description: "Generate a Remix App",
+    prompts: [...prompts],
+    actions: (answers) => {
+      if (!answers) return [];
+
+      return [
+        ...createRemixFiles("remix", answers),
+        modifyJestConfig(),
+        modifyTSConfig(),
+        pnpmInstall(),
+        fmtWrite(),
+        prettierWrite(),
+      ];
+    },
+  });
+}
+
 export default function (plop: NodePlopAPI) {
   getScriptGenerator(plop);
+  getRemixGenerator(plop);
 }
