@@ -98,6 +98,7 @@ function createTsupFiles(generator: string, answers: Answers) {
 function createRemixFiles(generator: string, answers: Answers) {
   const files = ["src/root.tsx", "src/routes/index.tsx"] as const;
   const tools = [
+    "playwright.config.ts",
     "remix.config.ts",
     "remix.env.d.ts",
     "jest.config.ts",

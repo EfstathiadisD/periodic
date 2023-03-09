@@ -2,6 +2,7 @@
   "name": "@periodic/tools",
   "private": true,
   "scripts": {
-    "build": "tsup --config ./tsup.config.ts"
+    "build": "tsup --config ./tsup.config.ts",
+    "fmt": "prettier --write ./src && eslint --fix ./src && tsc --noEmit"
   }
 }

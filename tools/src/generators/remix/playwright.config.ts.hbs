@@ -1,0 +1,43 @@
+import type { PlaywrightTestConfig } from "@playwright/test";
+import { devices } from "@playwright/test";
+
+const TIMEOUT = 15 * 1000;
+const EXPECT_TIMEOUT = 5 * 1000;
+
+const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
+
+const config: PlaywrightTestConfig = {
+  testDir: "./specs",
+  timeout: TIMEOUT,
+  expect: {
+    timeout: EXPECT_TIMEOUT,
+  },
+  forbidOnly: !!process.env.CI,
+  retries: process.env.CI ? 2 : 0,
+  workers: process.env.CI ? 1 : undefined,
+  use: {
+    actionTimeout: 0,
+    baseURL: BASE_URL,
+    trace: "on-first-retry",
+    screenshot: "only-on-failure",
+  },
+  projects: [
+    {
+      name: "Desktop Chrome",
+      use: {
+        ...devices["Desktop Chrome"],
+      },
+    },
+    {
+      name: "Desktop Firefox",
+      use: {
+        ...devices["Desktop Firefox"],
+      },
+    },
+  ],
+  webServer: {
+    command: "pnpm run dev",
+    url: BASE_URL,
+    reuseExistingServer: !process.env.CI,
+  },
+};

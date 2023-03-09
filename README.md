@@ -32,5 +32,4 @@ pnpm run generate
 After that, a CLI will appear and you have to choose the package you want to generate. You can choose from the following:
 
 - `Script`: A TS Package built using TSup.
-- `React`: A React Package built using Vite.
-- `Remix`: A Remix Package built using PlopStack.
+- `Remix`: A Remix Package with Playwright.
